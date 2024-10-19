@@ -1,0 +1,124 @@
+/* Basic Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Index Page-Specific Styling */
+body.index-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background Video/Image Styling */
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
+}
+
+/* Transparent Box Styling */
+.transparent-box {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Compact Transparent Container */
+.container-index {
+    background-color: rgba(116, 113, 113, 0.5); /* Semi-transparent background */
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #3700b3;
+}
+
+/* Responsive Adjustments for Index Page */
+@media (max-width: 767px) {
+    .container-index {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container-index {
+        padding: 25px;
+        max-width: 85%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .container-index {
+        max-width: 600px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .btn {
+        font-size: 18px;
+    }
+}

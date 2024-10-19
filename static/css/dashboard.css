@@ -1,0 +1,130 @@
+/* Basic Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+/* Compact container styling */
+.container, .news-section {
+    max-width: 850px;  /* Consistent width */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #6200EA;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Form Section Styling */
+.form-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.form-section label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="date"]:focus {
+    border-color: #6200EA;
+    outline: none;
+}
+
+/* Button Styling */
+.btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;  /* Added margin to create space between the button and the date fields */
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #5000b3;
+}
+
+/* Responsive iFrame for video */
+.responsive-iframe {
+    width: 100%;
+    height: 450px;  /* Increased height */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design for tablet and larger screens */
+@media (min-width: 768px) {
+    .responsive-iframe {
+        height: 500px; /* Larger height for tablet */
+    }
+
+    .container, .news-section {
+        padding: 25px;
+    }
+
+    .btn {
+        width: auto;
+        display: block;
+        margin: 0 auto;
+        padding: 12px 24px;
+    }
+
+    input[type="text"], input[type="date"] {
+        max-width: 600px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .btn {
+        margin-top: 30px;  /* Add extra margin to button for better spacing on desktop */
+    }
+}
+
+@media (min-width: 1025px) {
+    h3 {
+        font-size: 2rem;
+    }
+
+    /* Larger iframe on desktop */
+    .responsive-iframe {
+        height: 600px; /* Larger height for desktop */
+    }
+
+    .btn {
+        margin-top: 40px;  /* More space between the date field and button on larger screens */
+    }
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <title>Dashboard</title>
+</head>
+<body class="dashboard-page">
+
+    <!-- Live News Section on the Dashboard -->
+    <div class="news-section">
+        <iframe id="dashboardNewsVideo" class="responsive-iframe"
+                src="https://www.youtube.com/embed/OAHHA27td-A?autoplay=1&mute=1"
+                title="Yahoo Finance Live News"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Search Stock Data Form -->
+    <div class="container">
+        <h3>Search Stock Data</h3>
+        <form method="POST" action="/dashboard" class="form-section">
+            <label for="symbol">Stock Symbol:</label>
+            <input type="text" name="symbol" id="symbol" required placeholder="Enter stock symbol(s), e.g., AAPL, TSLA, GOOGL">
+
+            <label for="start_date">From Date:</label>
+            <input type="date" name="start_date" id="start_date" required>
+
+            <label for="end_date">To Date:</label>
+            <input type="date" name="end_date" id="end_date" required>
+
+            <button type="submit" class="btn">Get Stock Data</button>
+        </form>
+    </div>
+
+    <!-- JavaScript to handle autoplay and mute/unmute behavior -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const newsVideo = document.getElementById('dashboardNewsVideo');
+            let isMuted = localStorage.getItem('newsMuted') === 'true'; // Retrieve mute state from localStorage
+
+            // Set video source based on mute state
+            function updateVideoSource() {
+                newsVideo.src = isMuted
+                    ? "https://www.youtube.com/embed/OAHHA27td-A?autoplay=1&mute=1"
+                    : "https://www.youtube.com/embed/OAHHA27td-A?autoplay=1";
+            }
+
+            // Call the function to set the video source when the page loads
+            updateVideoSource();
+
+            // Toggle sound when clicking the video and save the mute state in localStorage
+            function toggleSound() {
+                isMuted = !isMuted; // Toggle mute state
+                localStorage.setItem('newsMuted', isMuted); // Save the new state in localStorage
+                updateVideoSource();
+            }
+
+            // Add click event to the video to toggle mute/unmute
+            newsVideo.addEventListener('click', toggleSound);
+        });
+    </script>
+
+</body>
+</html>

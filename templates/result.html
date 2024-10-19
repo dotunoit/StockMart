@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stock-result.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Stock Data Result</title>
+</head>
+<body class="stock-result-page">
+    <div class="container">
+        <!-- Live News Section (Sticky Video on Mobile) -->
+        <div class="news-section">
+            <iframe id="dashboardNewsVideo" class="responsive-iframe"
+                    src="https://www.youtube.com/embed/OAHHA27td-A?autoplay=1&mute=1"
+                    title="Yahoo Finance Live News"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Stock Data Charts -->
+        <div class="chart-container">
+            <h2>Stock Data Charts</h2>
+
+            <!-- Loop through the plots and company names -->
+            {% for plot in plots %}
+            <div class="single-chart">
+                <!-- Display Company Name along with Stock Symbol -->
+                <h3>{{ plot.company_name }}</h3>
+                <div id="plot_{{ plot.symbol }}"></div>
+                <script>
+                    var plot_data = {{ plot.plot_json | safe }};
+                    Plotly.newPlot('plot_{{ plot.symbol }}', plot_data.data, plot_data.layout);
+                </script>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Back to Dashboard Link -->
+        <div class="back-to-dashboard">
+            <button onclick="window.location.href='{{ url_for("dashboard") }}';" class="btn">Back to Dashboard</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for video mute/unmute functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const newsVideo = document.getElementById('dashboardNewsVideo');
+            let isMuted = localStorage.getItem('newsMuted') === 'true';
+
+            function updateVideoSource() {
+                newsVideo.src = isMuted
+                    ? "https://www.youtube.com/embed/OAHHA27td-A?autoplay=1&mute=1"
+                    : "https://www.youtube.com/embed/OAHHA27td-A?autoplay=1";
+            }
+
+            updateVideoSource();
+
+            function toggleSound() {
+                isMuted = !isMuted;
+                localStorage.setItem('newsMuted', isMuted);
+                updateVideoSource();
+            }
+
+            newsVideo.addEventListener('click', toggleSound);
+        });
+    </script>
+
+</body>
+</html>

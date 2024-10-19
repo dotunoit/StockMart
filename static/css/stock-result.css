@@ -1,0 +1,95 @@
+/* Basic Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+/* Container for video and charts */
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* News Section and iFrame (Sticky behavior on mobile only) */
+.news-section {
+    padding-bottom: 20px; /* Ensure spacing around the video */
+}
+
+.responsive-iframe {
+    width: 100%;  /* Full width for all devices */
+    height: 450px; /* Default height for mobile */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Chart Container */
+.chart-container {
+    margin-top: 20px;
+}
+
+/* Individual Chart Styling */
+.single-chart {
+    margin-bottom: 50px; /* Space between charts */
+}
+
+/* Back to Dashboard Button Styling */
+.back-to-dashboard {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #5000b3;
+}
+
+/* Mobile-Only Styles (Up to 767px) */
+@media (max-width: 767px) {
+    .news-section {
+        position: sticky;
+        top: 0; /* Sticky video for mobile */
+        z-index: 1000; /* Ensure video stays on top */
+        background-color: white; /* Keep video background consistent */
+    }
+
+    .responsive-iframe {
+        height: 350px; /* Reduce height for mobile */
+    }
+}
+
+/* For larger screens (No sticky behavior) */
+@media (min-width: 768px) {
+    .responsive-iframe {
+        height: 500px; /* Larger height for tablet */
+    }
+}
+
+@media (min-width: 1025px) {
+    .responsive-iframe {
+        height: 600px; /* Larger height for desktop */
+    }
+
+    .container {
+        max-width: 1000px; /* Wider layout on larger screens */
+    }
+}

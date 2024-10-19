@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <title>Stock Mart</title>    
+</head>
+<body class="index-page">
+
+    <!-- Container for the background media -->
+    <div id="backgroundContainer" class="background-media">
+        <!-- This div will dynamically load video or image depending on the screen size -->
+    </div>
+
+    <!-- Transparent Box with Content Centered -->
+    <div class="transparent-box">
+        <div class="container-index">
+            <h1>Welcome to Stock Mart</h1>
+            <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- JavaScript for Dynamically Changing Background (Any File Type) -->
+    <script>
+        function updateBackgroundMedia() {
+            const backgroundContainer = document.getElementById('backgroundContainer');
+            backgroundContainer.innerHTML = ''; // Clear existing content
+
+            // Define media files for different devices and types
+            const mediaFiles = {
+                desktop: {
+                    //mp4: "{{ url_for('static', filename='videos/desktop-background.mp4') }}",
+                    //gif: "{{ url_for('static', filename='img/desktop-background.gif') }}",
+                    jpg: "{{ url_for('static', filename='img/desktop-background.jpg') }}"
+                },
+                tablet: {
+                    //mp4: "{{ url_for('static', filename='videos/tablet-background.mp4') }}",
+                    gif: "{{ url_for('static', filename='img/tablet-background.gif') }}",
+                    //jpg: "{{ url_for('static', filename='img/tablet-background.jpg') }}"
+                },
+                mobile: {
+                    mp4: "{{ url_for('static', filename='videos/mobile-background.mp4') }}",
+                    //gif: "{{ url_for('static', filename='img/mobile-background.gif') }}",
+                    //jpg: "{{ url_for('static', filename='img/mobile-background.jpg') }}"
+                }
+            };
+
+            let selectedMedia;
+
+            // Choose media type based on screen width
+            if (window.innerWidth <= 767) {
+                selectedMedia = mediaFiles.mobile;
+            } else if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
+                selectedMedia = mediaFiles.tablet;
+            } else {
+                selectedMedia = mediaFiles.desktop;
+            }
+
+            // Define a priority order: MP4 -> GIF -> JPG
+            const mediaTypeOrder = ['mp4', 'gif', 'jpg'];
+
+            // Dynamically create the appropriate HTML tag based on media type
+            for (let type of mediaTypeOrder) {
+                if (selectedMedia[type]) {
+                    if (type === 'mp4') {
+                        // Video file
+                        const videoElement = document.createElement('video');
+                        videoElement.setAttribute('autoplay', 'true');
+                        videoElement.setAttribute('muted', 'true');  // Ensures the video is muted
+                        videoElement.setAttribute('loop', 'true');
+                        videoElement.setAttribute('playsinline', 'true'); // Important for mobile devices
+                        videoElement.classList.add('background-video');
+
+                        const sourceElement = document.createElement('source');
+                        sourceElement.setAttribute('src', selectedMedia[type]);
+                        sourceElement.setAttribute('type', 'video/mp4');
+                        videoElement.appendChild(sourceElement);
+
+                        backgroundContainer.appendChild(videoElement);
+                        break;
+                    } else {
+                        // Image or GIF file
+                        const imgElement = document.createElement('img');
+                        imgElement.setAttribute('src', selectedMedia[type]);
+                        imgElement.setAttribute('alt', 'background');
+                        imgElement.classList.add('background-video');
+
+                        backgroundContainer.appendChild(imgElement);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Run on page load
+        window.onload = updateBackgroundMedia;
+
+        // Run on window resize
+        window.onresize = updateBackgroundMedia;
+    </script>
+
+</body>
+</html>
